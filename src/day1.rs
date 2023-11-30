@@ -21,7 +21,7 @@ pub fn generator(input: &str) -> Vec<Vec<usize>> {
 }
 
 #[aoc(day1, part1)]
-pub fn solver1(input: &Vec<Vec<usize>>) -> usize {
+pub fn solver1(input: &[Vec<usize>]) -> usize {
     input
         .iter()
         .map(|calories| calories.iter().sum())
@@ -30,7 +30,7 @@ pub fn solver1(input: &Vec<Vec<usize>>) -> usize {
 }
 
 #[aoc(day1, part2)]
-pub fn solver2(input: &Vec<Vec<usize>>) -> usize {
+pub fn solver2(input: &[Vec<usize>]) -> usize {
     let mut sums = input
         .iter()
         .map(|calories| calories.iter().sum())
