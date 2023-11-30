@@ -56,3 +56,38 @@ pub fn solve1(input: &[Rucksack]) -> usize {
 
     priorities
 }
+
+pub struct Group<'a> {
+    first: &'a str,
+    second: &'a str,
+    third: &'a str,
+}
+
+impl Group<'_> {
+    pub fn find_shared_item(self) -> char {
+        let index = self
+            .first
+            .find(|to_find| {
+                self.second.chars().any(|current| current == to_find)
+                    && self.third.chars().any(|current| current == to_find)
+            })
+            .unwrap();
+        self.first.chars().nth(index).unwrap()
+    }
+}
+
+#[aoc(day3, part2)]
+pub fn solve2(input: &str) -> usize {
+    let lines: Vec<&str> = input.lines().collect();
+    lines
+        .chunks(3)
+        .map(|chunk| chunk.iter())
+        .map(|mut iter| Group {
+            first: iter.next().unwrap(),
+            second: iter.next().unwrap(),
+            third: iter.next().unwrap(),
+        })
+        .map(Group::find_shared_item)
+        .map(prioritize_item)
+        .sum()
+}
